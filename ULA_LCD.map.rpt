@@ -1,5 +1,5 @@
 Analysis & Synthesis report for ULA_LCD
-Thu May 30 19:06:55 2019
+Mon Jun 03 19:12:00 2019
 Quartus II 64-Bit Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Full Version
 
 
@@ -13,24 +13,27 @@ Quartus II 64-Bit Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Full Versio
   5. Analysis & Synthesis Source Files Read
   6. Analysis & Synthesis Resource Usage Summary
   7. Analysis & Synthesis Resource Utilization by Entity
-  8. Registers Removed During Synthesis
-  9. General Register Statistics
- 10. Multiplexer Restructuring Statistics (Restructuring Performed)
- 11. Parameter Settings for User Entity Instance: Top-level Entity: |ULA_LCD
- 12. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod3
- 13. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1
- 14. Parameter Settings for Inferred Entity Instance: lpm_divide:Div2
- 15. Parameter Settings for Inferred Entity Instance: lpm_divide:Div3
- 16. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod2
- 17. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
- 18. Parameter Settings for Inferred Entity Instance: lpm_divide:Div1
- 19. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
- 20. Parameter Settings for Inferred Entity Instance: lpm_divide:Div4
- 21. Parameter Settings for Inferred Entity Instance: lpm_divide:Div5
- 22. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod4
- 23. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod5
- 24. Analysis & Synthesis Messages
- 25. Analysis & Synthesis Suppressed Messages
+  8. State Machine - |ULA_LCD|charPos
+  9. State Machine - |ULA_LCD|est2
+ 10. State Machine - |ULA_LCD|estado
+ 11. Registers Removed During Synthesis
+ 12. General Register Statistics
+ 13. Multiplexer Restructuring Statistics (Restructuring Performed)
+ 14. Parameter Settings for User Entity Instance: Top-level Entity: |ULA_LCD
+ 15. Parameter Settings for Inferred Entity Instance: lpm_divide:Div0
+ 16. Parameter Settings for Inferred Entity Instance: lpm_divide:Div1
+ 17. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0
+ 18. Parameter Settings for Inferred Entity Instance: lpm_divide:Div2
+ 19. Parameter Settings for Inferred Entity Instance: lpm_divide:Div3
+ 20. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod2
+ 21. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod3
+ 22. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1
+ 23. Parameter Settings for Inferred Entity Instance: lpm_divide:Div4
+ 24. Parameter Settings for Inferred Entity Instance: lpm_divide:Div5
+ 25. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod4
+ 26. Parameter Settings for Inferred Entity Instance: lpm_divide:Mod5
+ 27. Analysis & Synthesis Messages
+ 28. Analysis & Synthesis Suppressed Messages
 
 
 
@@ -56,15 +59,15 @@ applicable agreement for further details.
 +------------------------------------------------------------------------------------+
 ; Analysis & Synthesis Summary                                                       ;
 +------------------------------------+-----------------------------------------------+
-; Analysis & Synthesis Status        ; Successful - Thu May 30 19:06:55 2019         ;
+; Analysis & Synthesis Status        ; Successful - Mon Jun 03 19:12:00 2019         ;
 ; Quartus II 64-Bit Version          ; 9.1 Build 350 03/24/2010 SP 2 SJ Full Version ;
 ; Revision Name                      ; ULA_LCD                                       ;
 ; Top-level Entity Name              ; ULA_LCD                                       ;
 ; Family                             ; Cyclone IV E                                  ;
-; Total logic elements               ; 1,125                                         ;
-;     Total combinational functions  ; 1,124                                         ;
-;     Dedicated logic registers      ; 165                                           ;
-; Total registers                    ; 165                                           ;
+; Total logic elements               ; 989                                           ;
+;     Total combinational functions  ; 985                                           ;
+;     Dedicated logic registers      ; 158                                           ;
+; Total registers                    ; 158                                           ;
 ; Total pins                         ; 35                                            ;
 ; Total virtual pins                 ; 0                                             ;
 ; Total memory bits                  ; 0                                             ;
@@ -163,11 +166,11 @@ applicable agreement for further details.
 ; Maximum allowed            ; 4           ;
 ;                            ;             ;
 ; Average used               ; 1.00        ;
-; Maximum used               ; 4           ;
+; Maximum used               ; 1           ;
 ;                            ;             ;
 ; Usage by Processor         ; % Time Used ;
 ;     1 processor            ; 100.0%      ;
-;     2-4 processors         ; < 0.1%      ;
+;     2-4 processors         ;   0.0%      ;
 +----------------------------+-------------+
 
 
@@ -176,24 +179,24 @@ applicable agreement for further details.
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
 ; File Name with User-Entered Path ; Used in Netlist ; File Type                    ; File Name with Absolute Path                                   ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
-; ULA_LCD.v                        ; yes             ; User Verilog HDL File        ; C:/Users/gss8/Desktop/sd/ULA_LCD.v                             ;
+; ULA_LCD.v                        ; yes             ; User Verilog HDL File        ; C:/Users/gss8/Desktop/ULA_LCD/ULA_LCD.v                        ;
 ; lpm_divide.tdf                   ; yes             ; Megafunction                 ; c:/altera/91sp2/quartus/libraries/megafunctions/lpm_divide.tdf ;
-; db/lpm_divide_m9m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/lpm_divide_m9m.tdf                 ;
-; db/sign_div_unsign_bkh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/sign_div_unsign_bkh.tdf            ;
-; db/alt_u_div_a4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/alt_u_div_a4f.tdf                  ;
-; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/add_sub_7pc.tdf                    ;
-; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/add_sub_8pc.tdf                    ;
-; db/lpm_divide_mhm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/lpm_divide_mhm.tdf                 ;
-; db/sign_div_unsign_ekh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/sign_div_unsign_ekh.tdf            ;
-; db/alt_u_div_g4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/alt_u_div_g4f.tdf                  ;
-; db/lpm_divide_jhm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/lpm_divide_jhm.tdf                 ;
-; db/lpm_divide_nhm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/lpm_divide_nhm.tdf                 ;
-; db/sign_div_unsign_fkh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/sign_div_unsign_fkh.tdf            ;
-; db/alt_u_div_i4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/alt_u_div_i4f.tdf                  ;
-; db/lpm_divide_khm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/lpm_divide_khm.tdf                 ;
-; db/sign_div_unsign_ckh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/sign_div_unsign_ckh.tdf            ;
-; db/alt_u_div_c4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/alt_u_div_c4f.tdf                  ;
-; db/lpm_divide_n9m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/sd/db/lpm_divide_n9m.tdf                 ;
+; db/lpm_divide_mhm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/lpm_divide_mhm.tdf            ;
+; db/sign_div_unsign_ekh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/sign_div_unsign_ekh.tdf       ;
+; db/alt_u_div_g4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/alt_u_div_g4f.tdf             ;
+; db/add_sub_7pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/add_sub_7pc.tdf               ;
+; db/add_sub_8pc.tdf               ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/add_sub_8pc.tdf               ;
+; db/lpm_divide_jhm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/lpm_divide_jhm.tdf            ;
+; db/sign_div_unsign_bkh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/sign_div_unsign_bkh.tdf       ;
+; db/alt_u_div_a4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/alt_u_div_a4f.tdf             ;
+; db/lpm_divide_m9m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/lpm_divide_m9m.tdf            ;
+; db/lpm_divide_nhm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/lpm_divide_nhm.tdf            ;
+; db/sign_div_unsign_fkh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/sign_div_unsign_fkh.tdf       ;
+; db/alt_u_div_i4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/alt_u_div_i4f.tdf             ;
+; db/lpm_divide_khm.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/lpm_divide_khm.tdf            ;
+; db/sign_div_unsign_ckh.tdf       ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/sign_div_unsign_ckh.tdf       ;
+; db/alt_u_div_c4f.tdf             ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/alt_u_div_c4f.tdf             ;
+; db/lpm_divide_n9m.tdf            ; yes             ; Auto-Generated Megafunction  ; C:/Users/gss8/Desktop/ULA_LCD/db/lpm_divide_n9m.tdf            ;
 +----------------------------------+-----------------+------------------------------+----------------------------------------------------------------+
 
 
@@ -202,27 +205,27 @@ applicable agreement for further details.
 +---------------------------------------------+-----------+
 ; Resource                                    ; Usage     ;
 +---------------------------------------------+-----------+
-; Estimated Total logic elements              ; 1,125     ;
+; Estimated Total logic elements              ; 989       ;
 ;                                             ;           ;
-; Total combinational functions               ; 1124      ;
+; Total combinational functions               ; 985       ;
 ; Logic element usage by number of LUT inputs ;           ;
-;     -- 4 input functions                    ; 400       ;
-;     -- 3 input functions                    ; 244       ;
-;     -- <=2 input functions                  ; 480       ;
+;     -- 4 input functions                    ; 312       ;
+;     -- 3 input functions                    ; 268       ;
+;     -- <=2 input functions                  ; 405       ;
 ;                                             ;           ;
 ; Logic elements by mode                      ;           ;
-;     -- normal mode                          ; 804       ;
-;     -- arithmetic mode                      ; 320       ;
+;     -- normal mode                          ; 694       ;
+;     -- arithmetic mode                      ; 291       ;
 ;                                             ;           ;
-; Total registers                             ; 165       ;
-;     -- Dedicated logic registers            ; 165       ;
+; Total registers                             ; 158       ;
+;     -- Dedicated logic registers            ; 158       ;
 ;     -- I/O registers                        ; 0         ;
 ;                                             ;           ;
 ; I/O pins                                    ; 35        ;
 ; Maximum fan-out node                        ; clk~input ;
-; Maximum fan-out                             ; 165       ;
-; Total fan-out                               ; 3645      ;
-; Average fan-out                             ; 2.68      ;
+; Maximum fan-out                             ; 158       ;
+; Total fan-out                               ; 3259      ;
+; Average fan-out                             ; 2.69      ;
 +---------------------------------------------+-----------+
 
 
@@ -231,7 +234,7 @@ applicable agreement for further details.
 +----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------+
 ; Compilation Hierarchy Node             ; LC Combinationals ; LC Registers ; Memory Bits ; DSP Elements ; DSP 9x9 ; DSP 18x18 ; Pins ; Virtual Pins ; Full Hierarchy Name                                                                                      ; Library Name ;
 +----------------------------------------+-------------------+--------------+-------------+--------------+---------+-----------+------+--------------+----------------------------------------------------------------------------------------------------------+--------------+
-; |ULA_LCD                               ; 1124 (586)        ; 165 (165)    ; 0           ; 0            ; 0       ; 0         ; 35   ; 0            ; |ULA_LCD                                                                                                 ; work         ;
+; |ULA_LCD                               ; 985 (451)         ; 158 (158)    ; 0           ; 0            ; 0       ; 0         ; 35   ; 0            ; |ULA_LCD                                                                                                 ; work         ;
 ;    |lpm_divide:Div0|                   ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Div0                                                                                 ;              ;
 ;       |lpm_divide_mhm:auto_generated|  ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Div0|lpm_divide_mhm:auto_generated                                                   ;              ;
 ;          |sign_div_unsign_ekh:divider| ; 25 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Div0|lpm_divide_mhm:auto_generated|sign_div_unsign_ekh:divider                       ;              ;
@@ -256,22 +259,22 @@ applicable agreement for further details.
 ;       |lpm_divide_khm:auto_generated|  ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Div5|lpm_divide_khm:auto_generated                                                   ;              ;
 ;          |sign_div_unsign_ckh:divider| ; 69 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Div5|lpm_divide_khm:auto_generated|sign_div_unsign_ckh:divider                       ;              ;
 ;             |alt_u_div_c4f:divider|    ; 69 (69)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Div5|lpm_divide_khm:auto_generated|sign_div_unsign_ckh:divider|alt_u_div_c4f:divider ;              ;
-;    |lpm_divide:Mod0|                   ; 21 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0                                                                                 ;              ;
-;       |lpm_divide_m9m:auto_generated|  ; 21 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0|lpm_divide_m9m:auto_generated                                                   ;              ;
-;          |sign_div_unsign_bkh:divider| ; 21 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
-;             |alt_u_div_a4f:divider|    ; 21 (21)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
-;    |lpm_divide:Mod1|                   ; 58 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1                                                                                 ;              ;
-;       |lpm_divide_m9m:auto_generated|  ; 58 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1|lpm_divide_m9m:auto_generated                                                   ;              ;
-;          |sign_div_unsign_bkh:divider| ; 58 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
-;             |alt_u_div_a4f:divider|    ; 58 (58)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
-;    |lpm_divide:Mod2|                   ; 22 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2                                                                                 ;              ;
-;       |lpm_divide_m9m:auto_generated|  ; 22 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2|lpm_divide_m9m:auto_generated                                                   ;              ;
-;          |sign_div_unsign_bkh:divider| ; 22 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
-;             |alt_u_div_a4f:divider|    ; 22 (22)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
-;    |lpm_divide:Mod3|                   ; 56 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3                                                                                 ;              ;
-;       |lpm_divide_m9m:auto_generated|  ; 56 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3|lpm_divide_m9m:auto_generated                                                   ;              ;
-;          |sign_div_unsign_bkh:divider| ; 56 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
-;             |alt_u_div_a4f:divider|    ; 56 (56)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
+;    |lpm_divide:Mod0|                   ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0                                                                                 ;              ;
+;       |lpm_divide_m9m:auto_generated|  ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0|lpm_divide_m9m:auto_generated                                                   ;              ;
+;          |sign_div_unsign_bkh:divider| ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
+;             |alt_u_div_a4f:divider|    ; 20 (20)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod0|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
+;    |lpm_divide:Mod1|                   ; 56 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1                                                                                 ;              ;
+;       |lpm_divide_m9m:auto_generated|  ; 56 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1|lpm_divide_m9m:auto_generated                                                   ;              ;
+;          |sign_div_unsign_bkh:divider| ; 56 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
+;             |alt_u_div_a4f:divider|    ; 56 (56)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod1|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
+;    |lpm_divide:Mod2|                   ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2                                                                                 ;              ;
+;       |lpm_divide_m9m:auto_generated|  ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2|lpm_divide_m9m:auto_generated                                                   ;              ;
+;          |sign_div_unsign_bkh:divider| ; 20 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
+;             |alt_u_div_a4f:divider|    ; 20 (20)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
+;    |lpm_divide:Mod3|                   ; 57 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3                                                                                 ;              ;
+;       |lpm_divide_m9m:auto_generated|  ; 57 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3|lpm_divide_m9m:auto_generated                                                   ;              ;
+;          |sign_div_unsign_bkh:divider| ; 57 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider                       ;              ;
+;             |alt_u_div_a4f:divider|    ; 57 (57)           ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod3|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider ;              ;
 ;    |lpm_divide:Mod4|                   ; 34 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod4                                                                                 ;              ;
 ;       |lpm_divide_n9m:auto_generated|  ; 34 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod4|lpm_divide_n9m:auto_generated                                                   ;              ;
 ;          |sign_div_unsign_ckh:divider| ; 34 (0)            ; 0 (0)        ; 0           ; 0            ; 0       ; 0         ; 0    ; 0            ; |ULA_LCD|lpm_divide:Mod4|lpm_divide_n9m:auto_generated|sign_div_unsign_ckh:divider                       ;              ;
@@ -284,36 +287,127 @@ applicable agreement for further details.
 Note: For table entries with two numbers listed, the numbers in parentheses indicate the number of resources of the given type used by the specific entity alone. The numbers listed outside of parentheses indicate the total resources of the given type used by the specific entity and all of its sub-entities in the hierarchy.
 
 
-+----------------------------------------------------------------------------------+
-; Registers Removed During Synthesis                                               ;
-+-----------------------------------------+----------------------------------------+
-; Register name                           ; Reason for Removal                     ;
-+-----------------------------------------+----------------------------------------+
-; flagbt4[3..4,11,15,18..19]              ; Merged with flagbt4[17]                ;
-; flagbt4[1..2,5..10,12..14,20..31]       ; Merged with flagbt4[16]                ;
-; flagbt2[1..21,23..30]                   ; Merged with flagbt2[31]                ;
-; flag2meio[2..31]                        ; Merged with flag2meio[1]               ;
-; flagbt3[1..30]                          ; Merged with flagbt3[31]                ;
-; flagbt1[2..8]                           ; Merged with flagbt1[1]                 ;
-; flagbt1[10..31]                         ; Merged with flagbt1[9]                 ;
-; flag45[2..31]                           ; Merged with flag45[1]                  ;
-; flag5[2..31]                            ; Merged with flag5[1]                   ;
-; flagbt4[16]                             ; Merged with flagbt4[17]                ;
-; flagbt2[22]                             ; Merged with flagbt2[31]                ;
-; flagbt1[9]                              ; Merged with flagbt1[1]                 ;
-; flagbt4[17]                             ; Stuck at GND due to stuck port data_in ;
-; flagbt2[31]                             ; Stuck at GND due to stuck port data_in ;
-; flag2meio[1]                            ; Stuck at GND due to stuck port data_in ;
-; flagbt3[31]                             ; Stuck at GND due to stuck port data_in ;
-; flagbt1[1]                              ; Stuck at GND due to stuck port data_in ;
-; flag45[1]                               ; Stuck at GND due to stuck port data_in ;
-; flag5[1]                                ; Stuck at GND due to stuck port data_in ;
-; charPos[7..31]                          ; Merged with charPos[6]                 ;
-; est2[5..31]                             ; Merged with est2[4]                    ;
-; estado[6..31]                           ; Merged with estado[5]                  ;
-; charPos[5..6]                           ; Stuck at GND due to stuck port data_in ;
-; Total Number of Removed Registers = 297 ;                                        ;
-+-----------------------------------------+----------------------------------------+
+Encoding Type:  One-Hot
++---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |ULA_LCD|charPos                                                                                                                                                                                                            ;
++----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
+; Name           ; charPos.001011 ; charPos.001010 ; charPos.001001 ; charPos.001000 ; charPos.000111 ; charPos.000110 ; charPos.000101 ; charPos.000100 ; charPos.000011 ; charPos.000010 ; charPos.000001 ; charPos.000000 ; charPos.010100 ;
++----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
+; charPos.000000 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ;
+; charPos.000001 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 1              ; 0              ;
+; charPos.000010 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 1              ; 0              ;
+; charPos.000011 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.000100 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.000101 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.000110 ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.000111 ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.001000 ; 0              ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.001001 ; 0              ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.001010 ; 0              ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.001011 ; 1              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 0              ;
+; charPos.010100 ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 0              ; 1              ; 1              ;
++----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+----------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |ULA_LCD|est2                                                                                                                                                                       ;
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+; Name            ; est2.0000001101 ; est2.0000001010 ; est2.0000000110 ; est2.0000000101 ; est2.0000000100 ; est2.0000000011 ; est2.0000000010 ; est2.0000000001 ; est2.0000000000 ; est2.0000010000 ;
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+; est2.0000000000 ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ;
+; est2.0000000001 ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 1               ; 0               ;
+; est2.0000000010 ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ; 1               ; 0               ;
+; est2.0000000011 ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ; 0               ; 1               ; 0               ;
+; est2.0000000100 ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ; 0               ; 0               ; 1               ; 0               ;
+; est2.0000000101 ; 0               ; 0               ; 0               ; 1               ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ;
+; est2.0000000110 ; 0               ; 0               ; 1               ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ;
+; est2.0000001010 ; 0               ; 1               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ;
+; est2.0000001101 ; 1               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 0               ;
+; est2.0000010000 ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 0               ; 1               ; 1               ;
++-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+-----------------+
+
+
+Encoding Type:  One-Hot
++-----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------+
+; State Machine - |ULA_LCD|estado                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                                   ;
++-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+
+; Name                                    ; estado.00000000000000000000000000010100 ; estado.00000000000000000000000000010001 ; estado.00000000000000000000000000010000 ; estado.00000000000000000000000000001111 ; estado.00000000000000000000000000001110 ; estado.00000000000000000000000000001101 ; estado.00000000000000000000000000001011 ; estado.00000000000000000000000000001010 ; estado.00000000000000000000000000001001 ; estado.00000000000000000000000000000111 ; estado.00000000000000000000000000000110 ; estado.00000000000000000000000000000101 ; estado.00000000000000000000000000000100 ; estado.00000000000000000000000000000011 ; estado.00000000000000000000000000000010 ; estado.00000000000000000000000000000001 ; estado.00000000000000000000000000000000 ;
++-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+
+; estado.00000000000000000000000000000000 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ;
+; estado.00000000000000000000000000000001 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 1                                       ;
+; estado.00000000000000000000000000000010 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000000011 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000000100 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000000101 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000000110 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000000111 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000001001 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000001010 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000001011 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000001101 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000001110 ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000001111 ; 0                                       ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000010000 ; 0                                       ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000010001 ; 0                                       ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
+; estado.00000000000000000000000000010100 ; 1                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 0                                       ; 1                                       ;
++-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+-----------------------------------------+
+
+
++---------------------------------------------------------------------------------+
+; Registers Removed During Synthesis                                              ;
++----------------------------------------+----------------------------------------+
+; Register name                          ; Reason for Removal                     ;
++----------------------------------------+----------------------------------------+
+; rw~reg0                                ; Stuck at GND due to stuck port data_in ;
+; charPos~15                             ; Lost fanout                            ;
+; charPos~16                             ; Lost fanout                            ;
+; charPos~17                             ; Lost fanout                            ;
+; charPos~18                             ; Lost fanout                            ;
+; charPos~20                             ; Lost fanout                            ;
+; est2~12                                ; Lost fanout                            ;
+; est2~13                                ; Lost fanout                            ;
+; est2~14                                ; Lost fanout                            ;
+; est2~15                                ; Lost fanout                            ;
+; est2~17                                ; Lost fanout                            ;
+; est2~18                                ; Lost fanout                            ;
+; est2~19                                ; Lost fanout                            ;
+; est2~20                                ; Lost fanout                            ;
+; est2~21                                ; Lost fanout                            ;
+; estado~19                              ; Lost fanout                            ;
+; estado~20                              ; Lost fanout                            ;
+; estado~21                              ; Lost fanout                            ;
+; estado~22                              ; Lost fanout                            ;
+; estado~23                              ; Lost fanout                            ;
+; estado~24                              ; Lost fanout                            ;
+; estado~25                              ; Lost fanout                            ;
+; estado~26                              ; Lost fanout                            ;
+; estado~27                              ; Lost fanout                            ;
+; estado~28                              ; Lost fanout                            ;
+; estado~29                              ; Lost fanout                            ;
+; estado~30                              ; Lost fanout                            ;
+; estado~31                              ; Lost fanout                            ;
+; estado~32                              ; Lost fanout                            ;
+; estado~33                              ; Lost fanout                            ;
+; estado~34                              ; Lost fanout                            ;
+; estado~35                              ; Lost fanout                            ;
+; estado~36                              ; Lost fanout                            ;
+; estado~37                              ; Lost fanout                            ;
+; estado~38                              ; Lost fanout                            ;
+; estado~39                              ; Lost fanout                            ;
+; estado~40                              ; Lost fanout                            ;
+; estado~41                              ; Lost fanout                            ;
+; estado~42                              ; Lost fanout                            ;
+; estado~43                              ; Lost fanout                            ;
+; estado~44                              ; Lost fanout                            ;
+; estado~45                              ; Lost fanout                            ;
+; estado~46                              ; Lost fanout                            ;
+; estado~47                              ; Lost fanout                            ;
+; estado~48                              ; Lost fanout                            ;
+; estado~49                              ; Lost fanout                            ;
+; estado~50                              ; Lost fanout                            ;
+; Total Number of Removed Registers = 47 ;                                        ;
++----------------------------------------+----------------------------------------+
 
 
 +------------------------------------------------------+
@@ -321,12 +415,12 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +----------------------------------------------+-------+
 ; Statistic                                    ; Value ;
 +----------------------------------------------+-------+
-; Total registers                              ; 165   ;
-; Number of registers using Synchronous Clear  ; 0     ;
-; Number of registers using Synchronous Load   ; 4     ;
+; Total registers                              ; 158   ;
+; Number of registers using Synchronous Clear  ; 76    ;
+; Number of registers using Synchronous Load   ; 2     ;
 ; Number of registers using Asynchronous Clear ; 0     ;
 ; Number of registers using Asynchronous Load  ; 0     ;
-; Number of registers using Clock Enable       ; 80    ;
+; Number of registers using Clock Enable       ; 67    ;
 ; Number of registers using Preset             ; 0     ;
 +----------------------------------------------+-------+
 
@@ -336,11 +430,14 @@ Note: For table entries with two numbers listed, the numbers in parentheses indi
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 ; Multiplexer Inputs ; Bus Width ; Baseline Area ; Area if Restructured ; Saving if Restructured ; Registered ; Example Multiplexer Output ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
-; 11:1               ; 2 bits    ; 14 LEs        ; 4 LEs                ; 10 LEs                 ; Yes        ; |ULA_LCD|charPos[6]        ;
-; 13:1               ; 5 bits    ; 40 LEs        ; 20 LEs               ; 20 LEs                 ; Yes        ; |ULA_LCD|charPos[4]        ;
-; 58:1               ; 2 bits    ; 76 LEs        ; 18 LEs               ; 58 LEs                 ; Yes        ; |ULA_LCD|dados[1]~reg0     ;
-; 58:1               ; 2 bits    ; 76 LEs        ; 8 LEs                ; 68 LEs                 ; Yes        ; |ULA_LCD|dados[7]~reg0     ;
-; 77:1               ; 3 bits    ; 153 LEs       ; 36 LEs               ; 117 LEs                ; Yes        ; |ULA_LCD|estado[1]         ;
+; 26:1               ; 2 bits    ; 34 LEs        ; 6 LEs                ; 28 LEs                 ; Yes        ; |ULA_LCD|rw~reg0           ;
+; 29:1               ; 2 bits    ; 38 LEs        ; 2 LEs                ; 36 LEs                 ; Yes        ; |ULA_LCD|dados[6]~reg0     ;
+; 29:1               ; 2 bits    ; 38 LEs        ; 16 LEs               ; 22 LEs                 ; Yes        ; |ULA_LCD|dados[5]~reg0     ;
+; 35:1               ; 2 bits    ; 46 LEs        ; 26 LEs               ; 20 LEs                 ; Yes        ; |ULA_LCD|dados[1]~reg0     ;
+; 23:1               ; 11 bits   ; 165 LEs       ; 132 LEs              ; 33 LEs                 ; No         ; |ULA_LCD|Selector43        ;
+; 28:1               ; 3 bits    ; 54 LEs        ; 18 LEs               ; 36 LEs                 ; No         ; |ULA_LCD|Selector32        ;
+; 35:1               ; 3 bits    ; 69 LEs        ; 6 LEs                ; 63 LEs                 ; No         ; |ULA_LCD|Selector13        ;
+; 35:1               ; 9 bits    ; 207 LEs       ; 27 LEs               ; 180 LEs                ; No         ; |ULA_LCD|Selector1         ;
 +--------------------+-----------+---------------+----------------------+------------------------+------------+----------------------------+
 
 
@@ -363,18 +460,18 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod3 ;
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Div0 ;
 +------------------------+----------------+------------------------+
 ; Parameter Name         ; Value          ; Type                   ;
 +------------------------+----------------+------------------------+
 ; LPM_WIDTHN             ; 8              ; Untyped                ;
-; LPM_WIDTHD             ; 4              ; Untyped                ;
+; LPM_WIDTHD             ; 7              ; Untyped                ;
 ; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                ;
 ; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                ;
 ; LPM_PIPELINE           ; 0              ; Untyped                ;
 ; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
 ; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
-; CBXI_PARAMETER         ; lpm_divide_m9m ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_mhm ; Untyped                ;
 ; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
 ; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
 ; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
@@ -386,7 +483,30 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1 ;
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Div1 ;
++------------------------+----------------+------------------------+
+; Parameter Name         ; Value          ; Type                   ;
++------------------------+----------------+------------------------+
+; LPM_WIDTHN             ; 8              ; Untyped                ;
+; LPM_WIDTHD             ; 4              ; Untyped                ;
+; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                ;
+; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                ;
+; LPM_PIPELINE           ; 0              ; Untyped                ;
+; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
+; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_jhm ; Untyped                ;
+; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
+; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
+; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
+; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
+; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
+; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
++------------------------+----------------+------------------------+
+Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
+
+
++------------------------------------------------------------------+
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0 ;
 +------------------------+----------------+------------------------+
 ; Parameter Name         ; Value          ; Type                   ;
 +------------------------+----------------+------------------------+
@@ -478,30 +598,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_divide:Div0 ;
-+------------------------+----------------+------------------------+
-; Parameter Name         ; Value          ; Type                   ;
-+------------------------+----------------+------------------------+
-; LPM_WIDTHN             ; 8              ; Untyped                ;
-; LPM_WIDTHD             ; 7              ; Untyped                ;
-; LPM_NREPRESENTATION    ; UNSIGNED       ; Untyped                ;
-; LPM_DREPRESENTATION    ; UNSIGNED       ; Untyped                ;
-; LPM_PIPELINE           ; 0              ; Untyped                ;
-; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
-; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
-; CBXI_PARAMETER         ; lpm_divide_mhm ; Untyped                ;
-; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
-; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
-; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
-; IGNORE_CARRY_BUFFERS   ; OFF            ; IGNORE_CARRY           ;
-; AUTO_CASCADE_CHAINS    ; ON             ; AUTO_CASCADE           ;
-; IGNORE_CASCADE_BUFFERS ; OFF            ; IGNORE_CASCADE         ;
-+------------------------+----------------+------------------------+
-Note: In order to hide this table in the UI and the text report file, please set the "Show Parameter Settings Tables in Synthesis Report" option in "Analysis and Synthesis Settings -> More Settings" to "Off".
-
-
-+------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_divide:Div1 ;
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod3 ;
 +------------------------+----------------+------------------------+
 ; Parameter Name         ; Value          ; Type                   ;
 +------------------------+----------------+------------------------+
@@ -512,7 +609,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 ; LPM_PIPELINE           ; 0              ; Untyped                ;
 ; LPM_REMAINDERPOSITIVE  ; TRUE           ; Untyped                ;
 ; MAXIMIZE_SPEED         ; 5              ; Untyped                ;
-; CBXI_PARAMETER         ; lpm_divide_jhm ; Untyped                ;
+; CBXI_PARAMETER         ; lpm_divide_m9m ; Untyped                ;
 ; CARRY_CHAIN            ; MANUAL         ; Untyped                ;
 ; OPTIMIZE_FOR_SPEED     ; 5              ; Untyped                ;
 ; AUTO_CARRY_CHAINS      ; ON             ; AUTO_CARRY             ;
@@ -524,7 +621,7 @@ Note: In order to hide this table in the UI and the text report file, please set
 
 
 +------------------------------------------------------------------+
-; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod0 ;
+; Parameter Settings for Inferred Entity Instance: lpm_divide:Mod1 ;
 +------------------------+----------------+------------------------+
 ; Parameter Name         ; Value          ; Type                   ;
 +------------------------+----------------+------------------------+
@@ -644,55 +741,46 @@ Note: In order to hide this table in the UI and the text report file, please set
 Info: *******************************************************************
 Info: Running Quartus II 64-Bit Analysis & Synthesis
     Info: Version 9.1 Build 350 03/24/2010 Service Pack 2 SJ Full Version
-    Info: Processing started: Thu May 30 19:06:46 2019
+    Info: Processing started: Mon Jun 03 19:11:52 2019
 Info: Command: quartus_map --read_settings_files=on --write_settings_files=off ULA_LCD -c ULA_LCD
 Info: Parallel compilation is enabled and will use 4 of the 4 processors detected
-Warning (10261): Verilog HDL Event Control warning at ULA_LCD.v(62): Event Control contains a complex event expression
 Info: Found 1 design units, including 1 entities, in source file ula_lcd.v
     Info: Found entity 1: ULA_LCD
 Info: Elaborating entity "ULA_LCD" for the top level hierarchy
-Warning (10036): Verilog HDL or VHDL warning at ULA_LCD.v(24): object "operacao" assigned a value but never read
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(330): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(339): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(348): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(384): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(393): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(402): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(485): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(495): truncated value with size 32 to match size of target (8)
-Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(505): truncated value with size 32 to match size of target (8)
-Warning (10762): Verilog HDL Case Statement warning at ULA_LCD.v(63): can't check case statement for completeness because the case expression has too many possible states
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(72): truncated value with size 32 to match size of target (22)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(79): truncated value with size 32 to match size of target (22)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(86): truncated value with size 32 to match size of target (22)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(357): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(367): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(377): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(417): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(427): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(437): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(528): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(538): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(548): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(610): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(620): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(630): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(670): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(680): truncated value with size 32 to match size of target (8)
+Warning (10230): Verilog HDL assignment warning at ULA_LCD.v(690): truncated value with size 32 to match size of target (8)
+Info (10264): Verilog HDL Case Statement information at ULA_LCD.v(92): all case item expressions in this case statement are onehot
 Info: Inferred 12 megafunctions from design logic
-    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod3"
-    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod1"
-    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div2"
-    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div3"
-    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod2"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div0"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div1"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod0"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div2"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div3"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod2"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod3"
+    Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod1"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div4"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Div5"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod4"
     Info: Inferred divider/modulo megafunction ("lpm_divide") from the following logic: "Mod5"
-Info: Elaborated megafunction instantiation "lpm_divide:Mod3"
-Info: Instantiated megafunction "lpm_divide:Mod3" with the following parameter:
-    Info: Parameter "LPM_WIDTHN" = "8"
-    Info: Parameter "LPM_WIDTHD" = "4"
-    Info: Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
-    Info: Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
-Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_m9m.tdf
-    Info: Found entity 1: lpm_divide_m9m
-Info: Found 1 design units, including 1 entities, in source file db/sign_div_unsign_bkh.tdf
-    Info: Found entity 1: sign_div_unsign_bkh
-Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_a4f.tdf
-    Info: Found entity 1: alt_u_div_a4f
-Info: Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
-    Info: Found entity 1: add_sub_7pc
-Info: Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
-    Info: Found entity 1: add_sub_8pc
-Info: Elaborated megafunction instantiation "lpm_divide:Div2"
-Info: Instantiated megafunction "lpm_divide:Div2" with the following parameter:
+Info: Elaborated megafunction instantiation "lpm_divide:Div0"
+Info: Instantiated megafunction "lpm_divide:Div0" with the following parameter:
     Info: Parameter "LPM_WIDTHN" = "8"
     Info: Parameter "LPM_WIDTHD" = "7"
     Info: Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
@@ -703,14 +791,30 @@ Info: Found 1 design units, including 1 entities, in source file db/sign_div_uns
     Info: Found entity 1: sign_div_unsign_ekh
 Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_g4f.tdf
     Info: Found entity 1: alt_u_div_g4f
-Info: Elaborated megafunction instantiation "lpm_divide:Div3"
-Info: Instantiated megafunction "lpm_divide:Div3" with the following parameter:
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_7pc.tdf
+    Info: Found entity 1: add_sub_7pc
+Info: Found 1 design units, including 1 entities, in source file db/add_sub_8pc.tdf
+    Info: Found entity 1: add_sub_8pc
+Info: Elaborated megafunction instantiation "lpm_divide:Div1"
+Info: Instantiated megafunction "lpm_divide:Div1" with the following parameter:
     Info: Parameter "LPM_WIDTHN" = "8"
     Info: Parameter "LPM_WIDTHD" = "4"
     Info: Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
     Info: Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_jhm.tdf
     Info: Found entity 1: lpm_divide_jhm
+Info: Found 1 design units, including 1 entities, in source file db/sign_div_unsign_bkh.tdf
+    Info: Found entity 1: sign_div_unsign_bkh
+Info: Found 1 design units, including 1 entities, in source file db/alt_u_div_a4f.tdf
+    Info: Found entity 1: alt_u_div_a4f
+Info: Elaborated megafunction instantiation "lpm_divide:Mod0"
+Info: Instantiated megafunction "lpm_divide:Mod0" with the following parameter:
+    Info: Parameter "LPM_WIDTHN" = "8"
+    Info: Parameter "LPM_WIDTHD" = "4"
+    Info: Parameter "LPM_NREPRESENTATION" = "UNSIGNED"
+    Info: Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
+Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_m9m.tdf
+    Info: Found entity 1: lpm_divide_m9m
 Info: Elaborated megafunction instantiation "lpm_divide:Div4"
 Info: Instantiated megafunction "lpm_divide:Div4" with the following parameter:
     Info: Parameter "LPM_WIDTHN" = "9"
@@ -743,33 +847,82 @@ Info: Instantiated megafunction "lpm_divide:Mod4" with the following parameter:
     Info: Parameter "LPM_DREPRESENTATION" = "UNSIGNED"
 Info: Found 1 design units, including 1 entities, in source file db/lpm_divide_n9m.tdf
     Info: Found entity 1: lpm_divide_n9m
+Warning: Output pins are stuck at VCC or GND
+    Warning (13410): Pin "rw" is stuck at GND
 Info: Timing-Driven Synthesis is running
+Info: 46 registers lost all their fanouts during netlist optimizations. The first 46 are displayed below.
+    Info: Register "charPos~15" lost all its fanouts during netlist optimizations.
+    Info: Register "charPos~16" lost all its fanouts during netlist optimizations.
+    Info: Register "charPos~17" lost all its fanouts during netlist optimizations.
+    Info: Register "charPos~18" lost all its fanouts during netlist optimizations.
+    Info: Register "charPos~20" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~12" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~13" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~14" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~15" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~17" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~18" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~19" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~20" lost all its fanouts during netlist optimizations.
+    Info: Register "est2~21" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~19" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~20" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~21" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~22" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~23" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~24" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~25" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~26" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~27" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~28" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~29" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~30" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~31" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~32" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~33" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~34" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~35" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~36" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~37" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~38" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~39" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~40" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~41" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~42" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~43" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~44" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~45" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~46" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~47" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~48" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~49" lost all its fanouts during netlist optimizations.
+    Info: Register "estado~50" lost all its fanouts during netlist optimizations.
 Info: Found the following redundant logic cells in design
-    Info (17048): Logic cell "lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider|add_sub_7_result_int[0]~0"
-    Info (17048): Logic cell "lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider|add_sub_6_result_int[0]~10"
     Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider|add_sub_7_result_int[0]~0"
     Info (17048): Logic cell "lpm_divide:Mod0|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider|add_sub_6_result_int[0]~10"
+    Info (17048): Logic cell "lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider|add_sub_7_result_int[0]~0"
+    Info (17048): Logic cell "lpm_divide:Mod2|lpm_divide_m9m:auto_generated|sign_div_unsign_bkh:divider|alt_u_div_a4f:divider|add_sub_6_result_int[0]~10"
+    Info (17048): Logic cell "lpm_divide:Mod4|lpm_divide_n9m:auto_generated|sign_div_unsign_ckh:divider|alt_u_div_c4f:divider|add_sub_8_result_int[0]~0"
     Info (17048): Logic cell "lpm_divide:Mod4|lpm_divide_n9m:auto_generated|sign_div_unsign_ckh:divider|alt_u_div_c4f:divider|add_sub_6_result_int[0]~10"
     Info (17048): Logic cell "lpm_divide:Mod4|lpm_divide_n9m:auto_generated|sign_div_unsign_ckh:divider|alt_u_div_c4f:divider|add_sub_7_result_int[0]~10"
-    Info (17048): Logic cell "lpm_divide:Mod4|lpm_divide_n9m:auto_generated|sign_div_unsign_ckh:divider|alt_u_div_c4f:divider|add_sub_8_result_int[0]~10"
-Info: Generated suppressed messages file C:/Users/gss8/Desktop/sd/ULA_LCD.map.smsg
+Info: Generated suppressed messages file C:/Users/gss8/Desktop/ULA_LCD/ULA_LCD.map.smsg
 Warning: Design contains 2 input pin(s) that do not drive logic
     Warning (15610): No output dependent on input pin "sinalA"
     Warning (15610): No output dependent on input pin "sinalB"
-Info: Implemented 1193 device resources after synthesis - the final resource count might be different
+Info: Implemented 1057 device resources after synthesis - the final resource count might be different
     Info: Implemented 23 input pins
     Info: Implemented 12 output pins
-    Info: Implemented 1158 logic cells
-Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 15 warnings
+    Info: Implemented 1022 logic cells
+Info: Quartus II 64-Bit Analysis & Synthesis was successful. 0 errors, 23 warnings
     Info: Peak virtual memory: 4469 megabytes
-    Info: Processing ended: Thu May 30 19:06:55 2019
-    Info: Elapsed time: 00:00:09
-    Info: Total CPU time (on all processors): 00:00:09
+    Info: Processing ended: Mon Jun 03 19:12:00 2019
+    Info: Elapsed time: 00:00:08
+    Info: Total CPU time (on all processors): 00:00:07
 
 
 +------------------------------------------+
 ; Analysis & Synthesis Suppressed Messages ;
 +------------------------------------------+
-The suppressed messages can be found in C:/Users/gss8/Desktop/sd/ULA_LCD.map.smsg.
+The suppressed messages can be found in C:/Users/gss8/Desktop/ULA_LCD/ULA_LCD.map.smsg.
 
 
