@@ -1,13 +1,13 @@
-Analysis & Synthesis Status : Successful - Mon Jun 03 20:09:23 2019
+Analysis & Synthesis Status : Successful - Tue Jun 04 17:11:56 2019
 Quartus II 64-Bit Version : 9.1 Build 350 03/24/2010 SP 2 SJ Full Version
 Revision Name : ULA_LCD
 Top-level Entity Name : ULA_LCD
 Family : Cyclone IV E
-Total logic elements : 2,958
-    Total combinational functions : 2,958
-    Dedicated logic registers : 183
-Total registers : 183
-Total pins : 35
+Total logic elements : 2,722
+    Total combinational functions : 2,722
+    Dedicated logic registers : 194
+Total registers : 194
+Total pins : 34
 Total virtual pins : 0
 Total memory bits : 0
 Embedded Multiplier 9-bit elements : 1

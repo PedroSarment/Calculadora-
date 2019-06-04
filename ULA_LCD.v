@@ -1,5 +1,5 @@
 // 50MHz
-module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinalA, sinalB);
+module ULA_LCD(clk, rs, rw, en, dados, SOMA, SUBT, MULT, IGUAL, A, B, sinalA, sinalB);
     
 	input [7:0] A;
 	input [7:0] B;
@@ -9,13 +9,11 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 	input SUBT;
 	input MULT;
 	input IGUAL;
-	output led;
 	output en;
 	output rw;
 	output rs;
 	output [7:0] dados;
 	input clk;
-	reg led = 0;
 	reg rs = 0;
 	reg rw =0;
 	reg en = 0;
@@ -41,6 +39,9 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 	reg menos;
 	reg [7:0] Alinha;
 	reg [7:0] Blinha;
+	reg menosA;
+	reg menosB;
+	reg menosR;
 	
 	
 	initial flag_rst = 0;
@@ -172,7 +173,7 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					 rs <= 0;
 					 rw <= 0;
 					 en <= 1;
-					 dados <= 8'b00001111;
+					 dados <= 8'b00001100;
 					 flag_rst <= 1;
 					 subest <= 0;
 					 estado <= 20;
@@ -264,6 +265,9 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					charPos <= 20;
 					flagbt1 <= 0;
 					flag_rst <= 1;
+					menosA <= 1;
+					menosB <= 1;
+					operacao = opSOMA;
 				end
 				 
 				if(!SUBT & !flagbt2) begin
@@ -275,6 +279,9 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					charPos <= 20;
 					flag_rst <= 1;
 					flagbt2 <= 0;
+					menosA <= 1;
+					menosB <= 1;
+					operacao = opSUBT;
 				end
 				 
 				if(!MULT & !flagbt3) begin
@@ -282,8 +289,13 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 				end
 				else if(MULT & flagbt3) begin
 					subest <= 0;
-					estado <= 7;
+					estado <= 25;
 					flagbt3 = 0;
+					flag_rst <= 1;
+					operacao = opMULT;
+					menosA <= 1;
+					menosB <= 1;
+					charPos <= 20;
 				end
 				 
 				if(!IGUAL & !flagbt4) begin
@@ -300,14 +312,11 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
         	
 			9: begin
 				if(subest == 0) begin
-					led  = 1;
 					subest <= 1;
 					flag_rst <= 1;
 				end
 				else if(subest == 1) begin
-					led  = 0;
 					if(flag5) begin
-						led  = 1;
 						rs <= 0;
 						rw <= 0;
 						en <= 1;
@@ -357,20 +366,32 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					subest <= 0;
 				end	
 				else if(charPos == 0) begin
-					rs <= 1;
-					rw <= 0;
-					en <= 1;
-					dados <= ((Alinha/100) + 48);
-					charPos <= 1;
-					estado <= 20;
-					est2 <= 10;
-					subest <= 0;
+					if(sinalA & menosA) begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= 45;
+						estado <= 20;
+						est2 <= 10;
+						subest <= 0;
+						menosA <= 0;
+					end
+					else begin 
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= ((A/100) + 48);
+						charPos <= 1;
+						estado <= 20;
+						est2 <= 10;
+						subest <= 0;
+					end
 				end
 				else if(charPos == 1) begin
 					rs <= 1;
 					rw <= 0;
 					en <= 1;
-					dados <= (((Alinha/10)%10) + 48);
+					dados <= (((A/10)%10) + 48);
 					charPos <= 2;
 					estado <= 20;
 					est2 <= 10;
@@ -380,7 +401,7 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					rs <= 1;
 					rw <= 0;
 					en <= 1;
-					dados <= ((Alinha%10) + 48);
+					dados <= ((A%10) + 48);
 					charPos <= 3;
 					estado <= 20;
 					est2 <= 10;
@@ -417,20 +438,33 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					subest <= 0;
 				end
 				else if(charPos == 6) begin
-					rs <= 1;
-					rw <= 0;
-					en <= 1;
-					dados <= ((Blinha/100) + 48);
-					charPos <= 7;
-					estado <= 20;
-					est2 <= 10;
-					subest <= 0;
+					if(sinalB & menosB) begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= 45;
+						estado <= 20;
+						est2 <= 10;
+						subest <= 0;
+						menosB <= 0;
+					end
+					else begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= ((B/100) + 48);
+						charPos <= 7;
+						estado <= 20;
+						est2 <= 10;
+						subest <= 0;
+					end
+					
 				end
 				else if(charPos == 7) begin
 					rs <= 1;
 					rw <= 0;
 					en <= 1;
-					dados <= ((Blinha/10)%10 + 48);
+					dados <= ((B/10)%10 + 48);
 					charPos <= 8;
 					estado <= 20;
 					est2 <= 10;
@@ -440,7 +474,7 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					rs <= 1;
 					rw <= 0;
 					en <= 1;
-					dados <= ((Blinha%10) + 48);
+					dados <= ((B%10) + 48);
 					charPos <= 9;
 					estado <= 20;
 					est2 <= 10;
@@ -457,13 +491,73 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					subest <= 0;
 				end
 				else if(charPos == 10) begin
-					en <= 0;
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 11;
 					estado <= 20;
 					est2 <= 10;
-					charPos <= 11;
 					subest <= 0;
 				end
 				else if(charPos == 11) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 12;
+					estado <= 20;
+					est2 <= 10;
+					subest <= 0;
+				end
+				else if(charPos == 12) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 13;
+					estado <= 20;
+					est2 <= 10;
+					subest <= 0;
+				end
+				else if(charPos == 13) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 14;
+					estado <= 20;
+					est2 <= 10;
+					subest <= 0;
+				end
+				else if(charPos == 14) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 15;
+					estado <= 20;
+					est2 <= 10;
+					subest <= 0;
+				end
+				else if(charPos == 15) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 17;
+					estado <= 20;
+					est2 <= 10;
+					subest <= 0;
+				end
+				else if(charPos == 17) begin
+					en <= 0;
+					estado <= 20;
+					est2 <= 10;
+					charPos <= 18;
+					subest <= 0;
+				end
+				else if(charPos == 18) begin
 					estado <= 6;
 					subest <= 0;
 				end
@@ -476,44 +570,57 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 				if(operacao == opSOMA) begin
 					if(sinalA & !sinalB) begin
 						operacao = opSUBT;
-						if(B > A) begin
-							menos = 1;
-						end
-						else menos = 0;
-					end
-					else if(!sinalA & sinalB) begin
-						operacao = opSUBT;
 						if(A > B) begin
 							menos = 1;
 						end
-						else menos = 0;
-						Alinha = B;
-						Blinha = A;
+						else begin
+							menos = 0;
+							Alinha = B;
+							Blinha = A;
+						end
 					end
-					else if(!sinalA & !sinalB) begin
-						menos = 1;
+					else if(!sinalA & sinalB) begin
+						operacao = opSUBT;
+						
+						if(B > A) begin
+							menos = 1;
+							Alinha = B;
+							Blinha = A;
+						end
+						else menos = 0;
+					end
+					else if(sinalA & sinalB) begin
+						if(A>0 & B>0) menos = 1;
+						else menos = 0;
 					end
 					else menos = 0;
 				end
 				else if(operacao == opSUBT) begin
 					if(sinalA & !sinalB) begin
 						operacao = opSOMA;
-						menos = 0;
+						if(A>0 & B>0) menos = 1;
+						else menos = 0;
 					end
 					else if(!sinalA & sinalB) begin
 						operacao = opSOMA;
-						menos = 1;
+						menos = 0;
 					end
-					else if(!sinalA & !sinalB) begin
+					else if(sinalA & sinalB) begin
 						if(A > B) begin
 							menos = 1;
 						end
-						else menos = 0;
-						Alinha = B;
-						Blinha = A;
+						else begin
+							menos = 0;
+							Alinha = B;
+							Blinha = A;
+						end
 					end
 					else begin
-						if(B > A) menos = 1;
+						if(B > A) begin
+							menos = 1;
+							Alinha = B;
+							Blinha = A;
+						end
 						else menos = 0;
 					end
 				end
@@ -580,7 +687,8 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 								est2 <= 21;
 								dados <= 8'b11000000;
 								if(sinalA & !sinalB || !sinalA & sinalB) begin
-									menos = 1;
+									if(A>0 & B>0) menos = 1;
+									else menos = 0;
 								end
 								else begin
 									menos = 0;
@@ -603,21 +711,8 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 				end
 				else if(subest == 1) begin
 					if(flag5) begin
-						if(menos) begin
-							menos = 0;
-							rs <= 1;
-							rw <= 0;
-							en <= 1;
-							dados <= 45;
-							charPos <= 5;
-							estado <= 20;
-							est2 <= 13;
-							subest <= 0;
-						end
-						else begin
-							subest <= 0;
-							estado <= 14;
-						end
+						subest <= 0;
+						estado <= 14;
 					end
 					else begin
 						flag_rst <= 0;
@@ -641,15 +736,26 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 							charPos <= 1;
 						end
 						else if(charPos == 1) begin
-						
-							rs <= 1;
-							rw <= 0;
-							en <= 1;
-							dados <= ((A+B)/100 + 48);
-							subest <= 0;
-							charPos <= 2;
-							estado <= 20;
-							est2 <= 13;
+							if(menos) begin
+								menos = 0;
+								rs <= 1;
+								rw <= 0;
+								en <= 1;
+								dados <= 45;
+								estado <= 20;
+								est2 <= 13;
+								subest <= 0;
+							end
+							else begin
+								rs <= 1;
+								rw <= 0;
+								en <= 1;
+								dados <= ((A+B)/100 + 48);
+								subest <= 0;
+								charPos <= 2;
+								estado <= 20;
+								est2 <= 13;
+							end
 						end
 						else if(charPos == 2) begin
 							rs <= 1;
@@ -724,14 +830,26 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					subest <= 0;
 				end	
 				else if(charPos == 0) begin
-					rs <= 1;
-					rw <= 0;
-					en <= 1;
-					dados <= ((A/100) + 48);
-					charPos <= 1;
-					estado <= 20;
-					est2 <= 16;
-					subest <= 0;
+					if(sinalA & menosA) begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= 45;
+						estado <= 20;
+						est2 <= 16;
+						subest <= 0;
+						menosA <= 0;
+					end
+					else begin 
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= ((A/100) + 48);
+						charPos <= 1;
+						estado <= 20;
+						est2 <= 16;
+						subest <= 0;
+					end
 				end
 				else if(charPos == 1) begin
 					rs <= 1;
@@ -784,14 +902,26 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					subest <= 0;
 				end
 				else if(charPos == 6) begin
-					rs <= 1;
-					rw <= 0;
-					en <= 1;
-					dados <= ((B/100) + 48);
-					charPos <= 7;
-					estado <= 20;
-					est2 <= 16;
-					subest <= 0;
+					if(sinalB & menosB) begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= 45;
+						estado <= 20;
+						est2 <= 16;
+						subest <= 0;
+						menosB <= 0;
+					end
+					else begin 
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= ((B/100) + 48);
+						charPos <= 7;
+						estado <= 20;
+						est2 <= 16;
+						subest <= 0;
+					end
 				end
 				else if(charPos == 7) begin
 					rs <= 1;
@@ -824,13 +954,73 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 					subest <= 0;
 				end
 				else if(charPos == 10) begin
-					en <= 0;
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 11;
 					estado <= 20;
 					est2 <= 16;
-					charPos <= 11;
 					subest <= 0;
 				end
 				else if(charPos == 11) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 12;
+					estado <= 20;
+					est2 <= 16;
+					subest <= 0;
+				end
+				else if(charPos == 12) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 13;
+					estado <= 20;
+					est2 <= 16;
+					subest <= 0;
+				end
+				else if(charPos == 13) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 14;
+					estado <= 20;
+					est2 <= 16;
+					subest <= 0;
+				end
+				else if(charPos == 14) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 15;
+					estado <= 20;
+					est2 <= 16;
+					subest <= 0;
+				end
+				else if(charPos == 15) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 16;
+					estado <= 20;
+					est2 <= 16;
+					subest <= 0;
+				end
+				else if(charPos == 16) begin
+					en <= 0;
+					estado <= 20;
+					est2 <= 16;
+					charPos <= 17;
+					subest <= 0;
+				end
+				else if(charPos == 17) begin
 					estado <= 6;
 					subest <= 0;
 				end
@@ -844,21 +1034,8 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 				end
 				else if(subest == 1) begin
 					if(flag5) begin
-						if(menos) begin
-							menos = 0;
-							rs <= 1;
-							rw <= 0;
-							en <= 1;
-							dados <= 45;
-							charPos <= 5;
-							estado <= 20;
-							est2 <= 18;
-							subest <= 0;
-						end
-						else begin 
-							subest <= 0;
-							estado <= 19;
-						end
+						subest <= 0;
+						estado <= 19;
 					end
 					else begin
 						flag_rst <= 0;
@@ -882,21 +1059,32 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 							charPos <= 1;
 						end
 						else if(charPos == 1) begin
-						
-							rs <= 1;
-							rw <= 0;
-							en <= 1;
-							dados <= ((A-B)/100 + 48);
-							subest <= 0;
-							charPos <= 2;
-							estado <= 20;
-							est2 <= 18;
+							if(menos) begin
+								menos = 0;
+								rs <= 1;
+								rw <= 0;
+								en <= 1;
+								dados <= 45;
+								estado <= 20;
+								est2 <= 18;
+								subest <= 0;
+							end
+							else begin
+								rs <= 1;
+								rw <= 0;
+								en <= 1;
+								dados <= ((Alinha-Blinha)/100 + 48);
+								subest <= 0;
+								charPos <= 2;
+								estado <= 20;
+								est2 <= 18;
+							end
 						end
 						else if(charPos == 2) begin
 							rs <= 1;
 							rw <= 0;
 							en <= 1;
-							dados <= ((((A-B)/10)%10) + 48);
+							dados <= ((((Alinha-Blinha)/10)%10) + 48);
 							subest <= 0;
 							charPos <= 3;
 							estado <= 20;
@@ -906,7 +1094,7 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 							rs <= 1;
 							rw <= 0;
 							en <= 1;
-							dados <= (((A-B)%10) + 48);
+							dados <= (((Alinha-Blinha)%10) + 48);
 							subest <= 0;
 							charPos <= 4;
 							estado <= 20;
@@ -944,21 +1132,8 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 				end
 				else if(subest == 1) begin
 					if(flag5) begin
-						if(menos) begin
-							menos = 0;
-							rs <= 1;
-							rw <= 0;
-							en <= 1;
-							dados <= 45;
-							charPos <= 5;
-							estado <= 20;
-							est2 <= 21;
-							subest <= 0;
-						end
-						else begin
-							subest <= 0;
-							estado <= 22;
-						end
+						subest <= 0;
+						estado <= 22;
 					end
 					else begin
 						flag_rst <= 0;
@@ -982,21 +1157,33 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 							charPos <= 1;
 						end
 						else if(charPos == 1) begin
-						
-							rs <= 1;
-							rw <= 0;
-							en <= 1;
-							dados <= ((A*B)/10000 + 48);
-							subest <= 0;
-							charPos <= 2;
-							estado <= 20;
-							est2 <= 21;
+							if(menos) begin
+								menos = 0;
+								rs <= 1;
+								rw <= 0;
+								en <= 1;
+								dados <= 45;
+								estado <= 20;
+								est2 <= 21;
+								subest <= 0;
+							end
+							else begin
+								rs <= 1;
+								rw <= 0;
+								en <= 1;
+								dados <= ((A*B)/10000 + 48);
+								subest <= 0;
+								charPos <= 2;
+								estado <= 20;
+								est2 <= 21;
+							end
+							
 						end
 						else if(charPos == 2) begin
 							rs <= 1;
 							rw <= 0;
 							en <= 1;
-							dados <= ((((A*B)/1000)%1000) + 48);
+							dados <= ((((A*B)/1000)%10) + 48);
 							subest <= 0;
 							charPos <= 3;
 							estado <= 20;
@@ -1006,7 +1193,7 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 							rs <= 1;
 							rw <= 0;
 							en <= 1;
-							dados <= (((A*B/100)%100) + 48);
+							dados <= (((A*B/100)%10) + 48);
 							subest <= 0;
 							charPos <= 4;
 							estado <= 20;
@@ -1056,6 +1243,231 @@ module ULA_LCD(clk, rs, rw, en, dados, led, SOMA, SUBT, MULT, IGUAL, A, B, sinal
 
 			end
    		 
+			24: begin
+				en <= 0;
+				if(subest == 0) begin
+					subest <= 1;
+					flag_rst <= 1;
+				end
+				else if(subest == 1) begin
+					if(flag5) begin
+						subest <= 0;
+						flag_rst <= 1;
+						estado <= 25;
+					end
+					else begin
+						flag_rst <= 0;
+					end
+				end
+			end
+			
+			25: begin
+				if (charPos == 20) begin
+					rs <= 0;
+					rw <= 0;
+					en <= 1;
+					dados <= 1;
+					charPos <= 0;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end	
+				else if(charPos == 0) begin
+					if(sinalA & menosA) begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= 45;
+						estado <= 20;
+						est2 <= 24;
+						subest <= 0;
+						menosA <= 0;
+					end
+					else begin 
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= ((A/100) + 48);
+						charPos <= 1;
+						estado <= 20;
+						est2 <= 24;
+						subest <= 0;
+					end
+				end
+				else if(charPos == 1) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= (((A/10)%10) + 48);
+					charPos <= 2;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 2) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= ((A%10) + 48);
+					charPos <= 3;
+					estado <= 20;
+					est2 <=24;
+					subest <= 0;
+				end
+				else if(charPos == 3) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 4;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 4) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 42;
+					charPos <= 5;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 5) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 6;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 6) begin
+					if(sinalB & menosB) begin
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= 45;
+						estado <= 20;
+						est2 <= 24;
+						subest <= 0;
+						menosB <= 0;
+					end
+					else begin 
+						rs <= 1;
+						rw <= 0;
+						en <= 1;
+						dados <= ((B/100) + 48);
+						charPos <= 7;
+						estado <= 20;
+						est2 <= 24;
+						subest <= 0;
+					end
+				end
+				else if(charPos == 7) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= ((B/10)%10 + 48);
+					charPos <= 8;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 8) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= ((B%10) + 48);
+					charPos <= 9;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 9) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 10;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 10) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 11;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 11) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 12;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 12) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 13;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 13) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 14;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 14) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 15;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 15) begin
+					rs <= 1;
+					rw <= 0;
+					en <= 1;
+					dados <= 32;
+					charPos <= 16;
+					estado <= 20;
+					est2 <= 24;
+					subest <= 0;
+				end
+				else if(charPos == 16) begin
+					en <= 0;
+					estado <= 20;
+					est2 <= 24;
+					charPos <= 17;
+					subest <= 0;
+				end
+				else if(charPos == 17) begin
+					estado <= 6;
+					subest <= 0;
+				end
+			end
     	endcase
 	end
     
